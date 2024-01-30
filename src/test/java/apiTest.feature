@@ -39,13 +39,14 @@ Feature: Testing Sample API
       }
       """
 
-  Scenario: Get a list of users
+  Scenario: Get a booking list
     Given path '/booking'
     When method GET
     Then status 200
     And match response == '#notnull'
+    And print response
 
-  Scenario: Get a specific user by ID
+  Scenario: Create a new booking
     Given path '/booking'
     And headers {Accept: 'application/json', Content-Type : 'application/json'}
     And request user
@@ -53,7 +54,7 @@ Feature: Testing Sample API
     Then status 200
     And print response
 
-  Scenario: Get a specific user by ID PUT
+  Scenario: Update a booking using PUT
     Given path '/booking/1'
     And headers {Accept: 'application/json', Content-Type : 'application/json', Authorization: 'Basic YWRtaW46cGFzc3dvcmQxMjM=', Cookie:'token=abc123'}
     And request PutUser
@@ -61,7 +62,7 @@ Feature: Testing Sample API
     Then status 200
     And print response
 
-  Scenario: Get a specific user by ID PUT
+  Scenario: Update a booking using PATCH
     Given path '/booking/1'
     And headers {Accept: 'application/json', Content-Type : 'application/json', Authorization: 'Basic YWRtaW46cGFzc3dvcmQxMjM=', Cookie:'token=abc123'}
     And request PatchUser
@@ -69,7 +70,7 @@ Feature: Testing Sample API
     Then status 200
     And print response
 
-  Scenario: Get a specific user by ID PUT
+  Scenario: Delete a booking using booking ID
     Given path '/booking/2612'
     And headers {Accept: 'application/json', Content-Type : 'application/json', Authorization: 'Basic YWRtaW46cGFzc3dvcmQxMjM=', Cookie:'token=abc123'}
     When method DELETE
